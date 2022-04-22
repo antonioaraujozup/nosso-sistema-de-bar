@@ -1,5 +1,8 @@
 package br.com.zup.edu.nossosistemadebares.bar;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -41,5 +44,19 @@ public class Mesa {
 
     public Long getId() {
         return id;
+    }
+
+    public Boolean estaReservada() {
+        return this.status == OCUPADO;
+    }
+
+    public void reservar(String reservadoPara) {
+        if(this.estaReservada()) {
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "A mesa já está ocupada");
+        }
+
+        this.reservadoPara = reservadoPara;
+        this.status = OCUPADO;
+        this.atualizadoEm = now();
     }
 }
