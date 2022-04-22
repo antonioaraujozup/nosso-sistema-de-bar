@@ -1,4 +1,4 @@
-# Nossos Sistema de Reserva de Mesas
+# Nosso Sistema de Reserva de Mesas
 
 API REST para reserva de mesas em um bar.
 
